@@ -6,7 +6,7 @@ from typing import Dict, Any
 
 # env var file constants
 CONFIG_ENDPOINT = 'COGNITIVE_SERVICES_ENDPOINT'
-CONFIG_PATH = 'SENTIMENT_ANALYSIS_PATH'
+CONFIG_PATH = 'KEY_PHRASE_EXTRACTION_PATH'
 CONFIG_KEY = 'COGNITIVE_SERVICES_KEY'
 
 
@@ -27,8 +27,8 @@ def load_config() -> Dict[str, str]:
     return config
 
 
-def analyze_sentiment(prompt: str, endpoint: str, path: str, key: str) -> None:
-    """Analyze the sentiment of the given text using the Text Analytics API."""
+def extract_key_phrases(prompt: str, endpoint: str, path: str, key: str) -> None:
+    """Extract key phrases from the given text using the Text Analytics API."""
 
     try:
         # JSON request body expects a document list, but only one item here for demo purposes
@@ -43,7 +43,7 @@ def analyze_sentiment(prompt: str, endpoint: str, path: str, key: str) -> None:
 
         print("\nRequest:\n", json.dumps(json_body, indent=2))
 
-        # make a REST call to the Text Analytics API resource for sentiment analysis, and include the API key in the header
+        # make a REST call to the Text Analytics API resource for key phrases extraction, and include the API key in the header
         headers = {
             'Content-Type': 'application/json',
             'Ocp-Apim-Subscription-Key': key
@@ -60,19 +60,21 @@ def analyze_sentiment(prompt: str, endpoint: str, path: str, key: str) -> None:
             print("\nResponse:\n", json.dumps(results, indent=2))
 
             for document in results["documents"]:
-                print("\nSentiment:", document["sentiment"])
-                print("Confidence Scores:", document["confidenceScores"], "\n\n")
+                print("\nKey Phrases:")
+                for key_phrase in document["keyPhrases"]:
+                    print("-", key_phrase)
+                print("\n")      
         else:
             print(f"Error: {response.status} - {data}")
 
         conn.close()
 
     except Exception as ex:
-        print(f"An error occurred during sentiment analysis: {ex}")
+        print(f"An error occurred during key phrases extraction: {ex}")
 
 
 def main() -> None:
-    """Main function to gather input text from the user and analyze its sentiment."""
+    """Main function to gather input text from the user and extract its key phrases."""
 
     try:
         config = load_config()
@@ -81,10 +83,10 @@ def main() -> None:
         key = config["key"]
 
         while True:
-            prompt = input('Enter some text to determine its sentiment. Enter q to quit.\n\n')
+            prompt = input('Enter some text to extract its key phrases. Enter q to quit.\n\n')
             if prompt.lower() == 'q':
                 break
-            analyze_sentiment(prompt, endpoint, path, key)
+            extract_key_phrases(prompt, endpoint, path, key)
 
     except ValueError as ve:
         print(f"Configuration error: {ve}")
