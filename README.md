@@ -4,6 +4,6 @@ This repository provides sample Python code for making REST calls to the [Langua
 
 ### Prerequisites
 
-(Python 3.8 or later)[https://www.python.org/]
-(python-dotenv library)[https://pypi.org/project/python-dotenv/]
-(Azure Language Service)[https://learn.microsoft.com/en-us/azure/ai-services/language-service/language-detection/quickstart?tabs=macos&pivots=programming-language-python]
+[Python](https://www.python.org/)3.8 or later
+[python-dotenv](https://pypi.org/project/python-dotenv/) library
+[Azure Language Service](https://learn.microsoft.com/en-us/azure/ai-services/language-service/language-detection/quickstart?tabs=macos&pivots=programming-language-python)set up in Azure
