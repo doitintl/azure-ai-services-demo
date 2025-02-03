@@ -12,7 +12,7 @@ This repository provides sample Python code for making REST calls to the [Langua
 
 ### Setup
 
-- Clone the repo:  git clone https://github.com/doitintl/azure-ai-services-demo.git
-- Install library to read environment variables file .env:  pip install python-dotenv
+- Clone the repo:  `git clone https://github.com/doitintl/azure-ai-services-demo.git`
+- Install library to read environment variables file .env:  `pip install python-dotenv`
 - Modify .env file to use your Azure Language Service Key and Endpoint.
-- Execute one of the python files where you will be prompted to provide text to be analyzed:  python <filename>
+- Execute one of the python files where you will be prompted to provide text to be analyzed:  `python <filename>`
